@@ -1,0 +1,18 @@
+E:\imglab\imglab\bin\Release\imglab.exe.config
+E:\imglab\imglab\bin\Release\imglab.exe
+E:\imglab\imglab\bin\Release\imglab.pdb
+E:\imglab\imglab\obj\Release\imglab.csprojResolveAssemblyReference.cache
+E:\imglab\imglab\obj\Release\imglab.Form1.resources
+E:\imglab\imglab\obj\Release\imglab.Properties.Resources.resources
+E:\imglab\imglab\obj\Release\imglab.csproj.GenerateResource.Cache
+E:\imglab\imglab\obj\Release\imglab.exe
+E:\imglab\imglab\obj\Release\imglab.pdb
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\bin\Release\imglab.exe.config
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\obj\Release\imglab.exe
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\obj\Release\imglab.pdb
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\bin\Release\imglab.exe
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\bin\Release\imglab.pdb
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\obj\Release\imglab.csprojResolveAssemblyReference.cache
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\obj\Release\imglab.Form1.resources
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\obj\Release\imglab.Properties.Resources.resources
+C:\Users\student\Documents\Visual Studio 2013\Projects\imglab\imglab\obj\Release\imglab.csproj.GenerateResource.Cache
