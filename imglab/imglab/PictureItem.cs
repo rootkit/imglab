@@ -102,7 +102,7 @@ namespace imglab
             {
                 foreach (RectData r in rectDatas)
                 {
-                    retVal += @"<box top='" + tC(r.x - emp.X / 2) + "' left='" + tC(r.y - emp.Y / 2) + "' width='" + tC(r.width) + "' height='" + tC(r.height) + "'/>" + Environment.NewLine;
+                    retVal += @"<box top='" + r.x + "' left='" + r.y + "' width='" + r.width + "' height='" + r.height + "'/>" + Environment.NewLine;
                 }
             }
             retVal += @"</image>";
