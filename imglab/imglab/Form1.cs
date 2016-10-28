@@ -41,6 +41,7 @@ namespace imglab
                     try
                     {
                         p.original = Image.FromFile(URL + @"\\" + f.Name);
+                        p.origURL = URL + @"\\" + f.Name;
                     }
                     catch (Exception)
                     {
@@ -62,12 +63,16 @@ namespace imglab
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(pictureBox1.Image != null)pictureBox1.Image.Dispose();
+            //if (selected != -1) picList[selected].original.Dispose();
             selecting = false;
             p1 = new Point();
             p2 = new Point();
             selected = picList.FindIndex(x => x.picName.Equals(listBox1.SelectedItem));
-            pictureBox1.Image = picList[selected].original;
+            //picList[selected].original = Image.FromFile(picList[selected].origURL);
+            //pictureBox1.Image = picList[selected].original;
             picList[selected].setCorrection(picList[selected].original.Width, picList[selected].original.Height, pictureBox1.Width, pictureBox1.Height);
+            showRects();
         }
 
         bool selecting = false;
@@ -93,16 +98,100 @@ namespace imglab
                 {
                     p2 = new Point(e.Location.X, e.Location.Y);
                     picList[selected].set(p1.X, p1.Y, p2.X, p2.Y);
-                    pictureBox1.Image = picList[selected].DrawRect();
+                   // pictureBox1.Image = picList[selected].DrawRect();
                     selecting = false;
                 }
             }
+            showRects();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             MakingFileClass m = new MakingFileClass();
-            m.start(picList,pictureBox1);
+            m.start(picList);
+        }
+
+        private void showRects(){
+            listBox2.Items.Clear();
+            for (int i = 0; i < picList[selected].rectDatas.Count; i++)
+            {
+                listBox2.Items.Add(picList[selected].rectDatas[i].ToString());
+            }
+            pictureBox1.Image = picList[selected].DrawRect();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedIndex != -1)
+            {
+                for (int i = 0; i < picList[selected].rectDatas.Count; i++)
+                {
+                    if (picList[selected].rectDatas[i].ToString().Equals(listBox2.SelectedItem.ToString()))
+                    {
+                        picList[selected].rectDatas.Remove(picList[selected].rectDatas[i]);
+                        break;
+                    }
+                }
+            }
+            showRects();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            setRotate(RotateFlipType.Rotate180FlipY);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            setRotate(RotateFlipType.Rotate180FlipX);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            setRotate(RotateFlipType.Rotate90FlipXY);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            setRotate(RotateFlipType.Rotate270FlipXY);
+        }
+
+        private void setRotate(RotateFlipType r)
+        {
+            picList[selected].rotateOriginal(r);
+            picList[selected].setCorrection(picList[selected].original.Width, picList[selected].original.Height, pictureBox1.Width, pictureBox1.Height);
+            selecting = false;
+            showRects();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                if (e.KeyData == Keys.Down)
+                {
+                    if (listBox1.SelectedIndex == 0)
+                    {
+                        listBox1.SetSelected(listBox1.Items.Count-1,true);
+                    }
+                    else
+                    {
+                        listBox1.SetSelected(listBox1.SelectedIndex - 1, true);
+                    }
+                }
+                else if (e.KeyData == Keys.Up)
+                {
+                    if (listBox1.SelectedIndex == listBox1.Items.Count - 1)
+                    {
+                        listBox1.SetSelected(0, true);
+                    }
+                    else
+                    {
+                        listBox1.SetSelected(listBox1.SelectedIndex + 1, true);
+                    }
+                }
+
+            }
         }
     }
 }

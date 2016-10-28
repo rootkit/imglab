@@ -20,5 +20,10 @@ namespace imglab
             this.width = width;
             this.height = height;
         }
+
+        public override string ToString()
+        {
+            return "Location("+ x +"," + y + ") Size(" + width + "," + height +")" ;
+        }
     }
 }

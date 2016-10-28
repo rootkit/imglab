@@ -11,6 +11,7 @@ namespace imglab
     class PictureItem
     {
         public Image original;
+        public string origURL;
         public string picName;
         public Form1 parent;
 
@@ -27,35 +28,20 @@ namespace imglab
             parent = f;
         }
 
+        private Bitmap canvas;
+        private Graphics g;
+        private Pen p= new Pen(Color.Red, 3);
         public Image DrawRect(int x,int y,int wei,int hei)
         {
-           // Bitmap canvas = new Bitmap((int)((double)original.Width * corr), (int)((double)original.Height * corr));
-            Bitmap canvas = new Bitmap(parent.pictureBox1.Image);
-            Graphics g = Graphics.FromImage(canvas);
-            Pen p = new Pen(Color.Red, 3);
+            canvas = new Bitmap(original);
+            g = Graphics.FromImage(canvas);
 
-            RectData outData = null;
+            //ここらへんのメモリリリリリーク修正
             foreach (RectData r in rectDatas)
             {
-                bool xOUT1 = r.x <= emp.X / 2 || r.x >= PictureBoxData.W - emp.X / 2;
-                bool xOUT2 = r.x + r.width <= emp.X / 2 || r.x + r.width >= PictureBoxData.W - emp.X / 2;
-                bool yOUT1 = r.y <= emp.Y / 2 || r.y >= PictureBoxData.H - emp.Y / 2;
-                bool yOUT2 = r.y + r.height <= emp.Y / 2 || r.y + r.height >= PictureBoxData.H - emp.Y / 2;
-                bool isOutofPicture = xOUT1 || xOUT2 || yOUT1 || yOUT2;
-                if(!isOutofPicture)
-                {
                     g.DrawRectangle(p, tC(r.x - emp.X / 2), tC(r.y - emp.Y / 2), tC(r.width), tC(r.height));
-                }
-                else
-                {
-                    MessageBox.Show("画像の範囲外を選択している可能性が高いです。やりなおせ",
-                    "エラー",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                    outData = r;
-                }
             }
-            if (outData != null) { rectDatas.Remove(outData); }
+            g.Dispose();
             return canvas;
         }
         private int tC(int num)
@@ -77,7 +63,26 @@ namespace imglab
 
             var r = new RectData();
             r.setData(locate.X, locate.Y, width, height);
-            rectDatas.Add(r);
+
+            bool xOUT1 = r.x <= emp.X / 2 || r.x >= PictureBoxData.W - emp.X / 2;
+            bool xOUT2 = r.x + r.width <= emp.X / 2 || r.x + r.width >= PictureBoxData.W - emp.X / 2;
+            bool yOUT1 = r.y <= emp.Y / 2 || r.y >= PictureBoxData.H - emp.Y / 2;
+            bool yOUT2 = r.y + r.height <= emp.Y / 2 || r.y + r.height >= PictureBoxData.H - emp.Y / 2;
+            bool isnotM = r.height < 0 || r.width < 0;
+            bool isOutofPicture = xOUT1 || xOUT2 || yOUT1 || yOUT2 || isnotM;
+            if (!isOutofPicture)
+            {
+                rectDatas.Add(r);
+            }
+            else
+            {
+                MessageBox.Show("画像の範囲外を選択している可能性が高いです。やり直してください",
+                  "エラー",
+                  MessageBoxButtons.OK,
+                  MessageBoxIcon.Error);
+                
+            }
+
         }
 
 
@@ -102,11 +107,17 @@ namespace imglab
             {
                 foreach (RectData r in rectDatas)
                 {
-                    retVal += @"<box top='" + tC(r.x - emp.X / 2) + "' left='" + tC(r.y - emp.Y / 2) + "' width='" + tC(r.width) + "' height='" + tC(r.height) + "'/>" + Environment.NewLine;
+                    retVal += @"<box top='" + r.x + "' left='" + r.y + "' width='" + r.width + "' height='" + r.height + "'/>" + Environment.NewLine;
                 }
             }
             retVal += @"</image>";
             return retVal;
+        }
+
+        public void rotateOriginal(RotateFlipType rft){
+            rectDatas.Clear();
+            original.RotateFlip(rft);
+            
         }
     }
 }

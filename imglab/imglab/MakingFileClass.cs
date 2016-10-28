@@ -18,11 +18,11 @@ namespace imglab
         public string fileLocate = "";
 
 
-        public void start(List<PictureItem> pL,PictureBox pB)
+        public void start(List<PictureItem> pL)
         {
             openSaveFileDialog();
             extendXML(pL);
-            saveToJPG(pL,pB);
+            saveToJPG(pL);
 
         }
 
@@ -46,7 +46,7 @@ namespace imglab
                 {
                     FileSystem.DeleteFile(URL);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
@@ -79,28 +79,20 @@ namespace imglab
             //みじっそう たぶん使わない
         }
 
-        public void saveToJPG(List<PictureItem> picList, PictureBox p)
+        public void saveToJPG(List<PictureItem> picList)
         {
             Bitmap bmp;
             Bitmap BLUEBmp = new Bitmap(PictureBoxData.W, PictureBoxData.H);
             Graphics g = Graphics.FromImage(BLUEBmp);
             Rectangle rect1 = new Rectangle(0, 0, PictureBoxData.W, PictureBoxData.H);
 
-            Rectangle rect2;
             foreach (var l in picList)
             {
                 if (l.selected)
                 {
                     g.FillRectangle(Brushes.Blue, rect1);
                     bmp = new Bitmap(l.original);
-                    p.Image = bmp;
-                    rect2 = new Rectangle((PictureBoxData.W - p.Image.Size.Width) / 2, (PictureBoxData.H - p.Image.Size.Height) / 2, PictureBoxData.W, PictureBoxData.H);
-                    //800*600の背景青塗画像を作成
-                    //(emp.X/2,emp.Y/2)の位置にp.Imageを上書き
-                    //それをSAVE
-                    //ここらへんの修正を次回
-                    TextureBrush tb1 = new TextureBrush(p.Image, WrapMode.Clamp);
-                    g.FillRectangle(tb1,rect2);
+                    g.DrawImage(bmp, l.emp.X/2, l.emp.Y/2, (int)((double)l.original.Width*l.corr), (int)((double)l.original.Height*l.corr));
 
                     BLUEBmp.Save(fileLocate + "\\" + l.picName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
                 }
