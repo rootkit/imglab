@@ -40,6 +40,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +49,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(0, 21);
+            this.listBox1.Location = new System.Drawing.Point(0, 45);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(163, 388);
             this.listBox1.TabIndex = 0;
@@ -98,9 +100,9 @@
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(0, 415);
+            this.listBox2.Location = new System.Drawing.Point(0, 439);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(163, 148);
+            this.listBox2.Size = new System.Drawing.Size(163, 124);
             this.listBox2.TabIndex = 0;
             // 
             // button3
@@ -153,11 +155,29 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(40, 21);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(123, 19);
+            this.textBox2.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "名前";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 626);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -193,6 +213,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

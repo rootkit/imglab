@@ -76,7 +76,7 @@ namespace imglab
         private void button2_Click(object sender, EventArgs e)
         {
             MakingFileClass m = new MakingFileClass();
-            m.start(picList);
+            m.start(picList,textBox2.Text);
         }
 
         private void showRects(){
@@ -164,7 +164,7 @@ namespace imglab
 
         private void getFiles()
         {
-            string[] extent = new string[] { "*.jpg","*.png","*.jpg" }; 
+            string[] extent = new string[] { "*.jpg","*.png"}; 
             System.IO.FileInfo[] files = null;
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(URL);
             try

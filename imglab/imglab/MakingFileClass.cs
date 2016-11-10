@@ -18,9 +18,10 @@ namespace imglab
         public string fileLocate = "";
 
 
-        public void start(List<PictureItem> pL)
+        public void start(List<PictureItem> pL,string dirName)
         {
-            openSaveFileDialog();
+            createDir(dirName);
+            //openSaveFileDialog();
             extendXML(pL);
             saveToJPG(pL);
 
@@ -57,7 +58,7 @@ namespace imglab
         {
             System.IO.StreamWriter sw = new System.IO.StreamWriter(URL, true,
             System.Text.Encoding.GetEncoding("Shift_Jis"));
-
+            
             sw.WriteLine(@"<?xml version='1.0' encoding='ISO-8859-1'?>");
             sw.WriteLine(@"<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>");
             sw.WriteLine(@"<dataset>");
@@ -76,7 +77,18 @@ namespace imglab
 
         public void createDir(string name)
         {
-            //みじっそう たぶん使わない
+            try
+            {
+                System.IO.Directory.CreateDirectory(@".\SAVE\" + name);
+            }
+            catch (IOException)
+            {
+                System.IO.Directory.Delete(@".\SAVE\" + name, true);
+                System.IO.Directory.CreateDirectory(@".\SAVE\" + name);
+            }
+            fileLocate = System.IO.Path.GetFullPath(@".\SAVE\" + name);
+            FILENAME = name;
+            URL = fileLocate + "//" + name + ".svm";
         }
 
         public void saveToJPG(List<PictureItem> picList)
