@@ -16,3 +16,6 @@ E:\imglab\imglab\obj\Debug\imglab.csprojResolveAssemblyReference.cache
 E:\imglab\imglab\obj\Debug\imglab.Form1.resources
 E:\imglab\imglab\obj\Debug\imglab.Properties.Resources.resources
 E:\imglab\imglab\obj\Debug\imglab.csproj.GenerateResource.Cache
+C:\Users\shimau6\Source\Repos\imglab\imglab\imglab\bin\Debug\imglab.exe.config
+C:\Users\shimau6\Source\Repos\imglab\imglab\imglab\obj\Debug\imglab.exe
+C:\Users\shimau6\Source\Repos\imglab\imglab\imglab\obj\Debug\imglab.pdb

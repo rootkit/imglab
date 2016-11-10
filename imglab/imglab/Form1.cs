@@ -26,39 +26,7 @@ namespace imglab
         private void button1_Click(object sender, EventArgs e)
         {
             URL = textBox1.Text;
-
-            System.IO.FileInfo[] files = null;
-            try
-            {
-                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(URL);
-                files = di.GetFiles("*.jpg", System.IO.SearchOption.TopDirectoryOnly);
-                int pw = pictureBox1.Size.Width;
-                int ph = pictureBox1.Size.Height;
-                foreach (System.IO.FileInfo f in files)
-                {
-                    listBox1.Items.Add(f.Name.Split('.')[0]);
-                    PictureItem p = new PictureItem(this);
-                    try
-                    {
-                        p.original = Image.FromFile(URL + @"\\" + f.Name);
-                        p.origURL = URL + @"\\" + f.Name;
-                    }
-                    catch (Exception)
-                    {
-                        p.original = null;
-                    }
-                    p.picName = f.Name.Split('.')[0];
-                    picList.Add(p);
-                }
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("入力を見直してください\r\n " + err.StackTrace,
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-            }
-
+            getFiles();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -191,6 +159,45 @@ namespace imglab
                     }
                 }
 
+            }
+        }
+
+        private void getFiles()
+        {
+            string[] extent = new string[] { "*.jpg","*.png","*.jpg" }; 
+            System.IO.FileInfo[] files = null;
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(URL);
+            try
+            {
+                for (int i = 0; i < extent.Length; i++)
+                {
+                    files = di.GetFiles(extent[i], System.IO.SearchOption.TopDirectoryOnly);
+                    int pw = pictureBox1.Size.Width;
+                    int ph = pictureBox1.Size.Height;
+                    foreach (System.IO.FileInfo f in files)
+                    {
+                        listBox1.Items.Add(f.Name.Split('.')[0]);
+                        PictureItem p = new PictureItem(this);
+                        try
+                        {
+                            p.original = Image.FromFile(URL + @"\\" + f.Name);
+                            p.origURL = URL + @"\\" + f.Name;
+                        }
+                        catch (Exception)
+                        {
+                            p.original = null;
+                        }
+                        p.picName = f.Name.Split('.')[0];
+                        picList.Add(p);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("入力を見直してください\r\n " + err.StackTrace,
+                "エラー",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
             }
         }
     }
